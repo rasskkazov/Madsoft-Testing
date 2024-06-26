@@ -6,7 +6,26 @@ export const Test = () => {
     <div className="test">
       <Question
         questionLine="Вопрос 1"
-        formType="singleVariant"
+        ansType="multipleVariants"
+        ansTypeProps={{ variants: [{ label: "bogdan", value: "bogdan" }] }}
+        submitBtn={<AnswerQuestion />}
+      />
+      <Question
+        questionLine="Вопрос 2"
+        ansType="shortAnswer"
+        ansTypeProps={{ maxLength: 100 }}
+        submitBtn={<AnswerQuestion />}
+      />
+      <Question
+        questionLine="Вопрос 3"
+        ansType="singleVar"
+        ansTypeProps={{ variants: [{ label: "alo", value: "alo" }] }}
+        submitBtn={<AnswerQuestion />}
+      />
+      <Question
+        questionLine="Вопрос 4"
+        ansType="longAnswer"
+        ansTypeProps={{}}
         submitBtn={<AnswerQuestion />}
       />
     </div>

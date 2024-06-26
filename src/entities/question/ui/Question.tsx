@@ -1,29 +1,42 @@
 import { ReactNode } from "react";
-import { TQuestion } from "../model/type";
-import { LongAnswer } from "./forms/LongAnswer";
-import { MultipleVariants } from "./forms/MultipleVariants";
-import { ShortAnswer } from "./forms/ShortAnswer";
-import { SingleVariant } from "./forms/SingleVariant";
+import {
+  TQuestion,
+  TextAnswerProps,
+  VariantsAnswerProps,
+} from "../model/types";
+import { LongAns } from "./forms/LongAns";
+import { MultipleVars } from "./forms/MultipleVars";
+import { ShortAns } from "./forms/ShortAns";
+import { SingleVar } from "./forms/SingleVar";
 
-const formTypes = {
-  longAnswer: <LongAnswer />,
-  MultipleVariants: <MultipleVariants />,
-  shortAnswer: <ShortAnswer />,
-  singleVariant: <SingleVariant />,
+const answerTypes = {
+  longAnswer: (props: TextAnswerProps) => <LongAns {...props} />,
+  shortAnswer: (props: TextAnswerProps) => <ShortAns {...props} />,
+  multipleVariants: (props: VariantsAnswerProps) => <MultipleVars {...props} />,
+  singleVar: (props: VariantsAnswerProps) => <SingleVar {...props} />,
+};
+type TAnsTypeProps = TextAnswerProps & VariantsAnswerProps;
+
+type TAns = keyof typeof answerTypes;
+type TAnsProps = {
+  [K in TAns]: Parameters<(typeof answerTypes)[K]>[0];
 };
 
-type TFormTypes = keyof typeof formTypes;
-
-export type TQuestionProps = TQuestion & {
-  formType: TFormTypes;
+export type QuestionProps<T extends TAns> = TQuestion & {
+  ansType: T;
+  ansTypeProps: TAnsProps[T];
   submitBtn: ReactNode;
 };
 
-export const Question = (props: TQuestionProps) => {
+export const Question = <T extends TAns>(props: QuestionProps<T>) => {
+  const answer = answerTypes[props.ansType](
+    props.ansTypeProps as TAnsTypeProps
+  );
+
   return (
     <div className="question">
       <div className="questionLine">{props.questionLine}</div>
-      <div className="questionAnswer">{formTypes[props.formType]}</div>
+      <div className="questionAnswer">{answer}</div>
       <div className="questionSubmitSlot">{props.submitBtn}</div>
     </div>
   );
