@@ -8,3 +8,10 @@ export type VariantsAnswerProps = {
     value: string;
   }[];
 };
+
+export const ANSWER_TYPES = {
+  LONG_TEXT: "longAns",
+  SHORT_TEXT: "shortAns",
+  MUL_VARS: "multipleVars",
+  SINGLE_VAR: "singleVar",
+};

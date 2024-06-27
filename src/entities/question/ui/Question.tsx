@@ -1,20 +1,33 @@
 import { ReactNode } from "react";
-import { TQuestion } from "../model/types";
-import { Typography, Flex } from "antd";
-
-export type QuestionProps = TQuestion & {
-  submitBtn: ReactNode;
-  children: ReactNode;
-};
+import { Typography, Flex, Form, Button, FormProps, Space } from "antd";
+import { TAnswer, TQuestion } from "../model/types";
 
 const { Title } = Typography;
 
+type QuestionProps = Omit<TQuestion, "type"> & {
+  children: ReactNode;
+};
+
 export const Question = (props: QuestionProps) => {
+  const [form] = Form.useForm<TAnswer>();
+
+  const onFinish: FormProps<TAnswer>["onFinish"] = (values: TAnswer) => {
+    console.log(props.id, values.value, "in LocalStorage");
+  };
+
   return (
     <Flex className="question" gap="middle" vertical>
       <Title level={5}>{props.questionLine}</Title>
-      <div className="question__content">{props.children}</div>
-      <div className="questionSubmitSlot">{props.submitBtn}</div>
+      <Form form={form} onFinish={onFinish}>
+        <Space direction="vertical">
+          {props.children}
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Ответить
+            </Button>
+          </Form.Item>
+        </Space>
+      </Form>
     </Flex>
   );
 };

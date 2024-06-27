@@ -1,15 +1,21 @@
+@import "@/shared/styles";
+
 .testing {
+  min-width: 50rem;
   max-width: 80rem;
+  min-height: 40rem;
   border: 1px pink solid;
 
   &__progress {
-    border: 1px green solid;
-
     div {
       div {
         flex-wrap: wrap;
         row-gap: 2px;
       }
     }
+  }
+
+  @include --mobile() {
+    min-width: 34rem;
   }
 }

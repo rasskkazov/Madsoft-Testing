@@ -1,5 +1,13 @@
+import { Form, Checkbox } from "antd";
 import { VariantsAnswerProps } from "../model/types";
 
 export const MultipleVars = (props: VariantsAnswerProps) => {
-  return <div>Multiple variants {props.variants[0].value}</div>;
+  return (
+    <Form.Item
+      name={"value"}
+      rules={[{ required: true, message: "Выберите вариант" }]}
+    >
+      <Checkbox.Group options={props.variants} />
+    </Form.Item>
+  );
 };
