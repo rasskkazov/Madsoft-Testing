@@ -15,5 +15,6 @@ export type TQuestion = {
 };
 
 export type TAnswer = {
+  id: number;
   value: string | string[];
 };

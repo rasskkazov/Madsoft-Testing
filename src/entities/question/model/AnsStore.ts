@@ -1,33 +1,31 @@
-// import { TAnswer } from "@/entities";
+import { TAnswer } from "./types";
 
-// const ANSWERS = "answers";
+const ANSWERS = "answers";
 
-// class AnsStorage {
-//   constructor() {
-//     if (!localStorage.getItem(ANSWERS)) {
-//       localStorage.setItem(ANSWERS, JSON.stringify([]));
-//     }
-//   }
+type TQuestionStatus = { questionId: number; completed: boolean };
+class AnsStorage {
+  constructor() {
+    if (!localStorage.getItem(ANSWERS)) {
+      localStorage.setItem(ANSWERS, JSON.stringify([]));
+    }
+  }
 
-//   private setAnswers(answers: TAnswer[]) {
-//     localStorage.setItem(ANSWERS, JSON.stringify(answers));
-//   }
+  private setAnswers(answers: TAnswer[]) {
+    localStorage.setItem(ANSWERS, JSON.stringify(answers));
+  }
 
-//   private getAnswers(): TAnswer[] {
-//     return JSON.parse(localStorage.getItem(ANSWERS));
-//   }
+  private getAnswers(): TAnswer[] {
+    return JSON.parse(localStorage.getItem(ANSWERS));
+  }
 
-//   getAnsById(id: number) {
-//     return this.getAnswers().find((ans) => ans.questionId === id);
-//   }
+  getAnsById(id: number) {
+    return this.getAnswers().find((ans) => ans.id === id);
+  }
 
-//   addAns(newAns: TAnswer) {
-//     let answers = this.getAnswers();
-//     const clearIdAnswers = answers.filter(
-//       (ansOld) => ansOld.questionId !== ansOld.questionId
-//     );
-//     this.setAnswers([...clearIdAnswers, newAns]);
-//   }
-// }
+  addAns(newAns: TAnswer) {
+    let answers = this.getAnswers();
+    this.setAnswers([...answers, newAns]);
+  }
+}
 
-// export const ansStorage = new AnsStorage();
+export const ansStorage = new AnsStorage();
