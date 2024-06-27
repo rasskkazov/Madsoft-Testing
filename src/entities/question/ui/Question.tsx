@@ -1,42 +1,17 @@
 import { ReactNode } from "react";
-import {
-  TQuestion,
-  TextAnswerProps,
-  VariantsAnswerProps,
-} from "../model/types";
-import { LongAns } from "./forms/LongAns";
-import { MultipleVars } from "./forms/MultipleVars";
-import { ShortAns } from "./forms/ShortAns";
-import { SingleVar } from "./forms/SingleVar";
+import { TQuestion } from "../model/types";
 
-const answerTypes = {
-  longAnswer: (props: TextAnswerProps) => <LongAns {...props} />,
-  shortAnswer: (props: TextAnswerProps) => <ShortAns {...props} />,
-  multipleVariants: (props: VariantsAnswerProps) => <MultipleVars {...props} />,
-  singleVar: (props: VariantsAnswerProps) => <SingleVar {...props} />,
-};
-type TAnsTypeProps = TextAnswerProps & VariantsAnswerProps;
-
-type TAns = keyof typeof answerTypes;
-type TAnsProps = {
-  [K in TAns]: Parameters<(typeof answerTypes)[K]>[0];
-};
-
-export type QuestionProps<T extends TAns> = TQuestion & {
-  ansType: T;
-  ansTypeProps: TAnsProps[T];
+export type QuestionProps = TQuestion & {
   submitBtn: ReactNode;
+  children: ReactNode;
 };
 
-export const Question = <T extends TAns>(props: QuestionProps<T>) => {
-  const answer = answerTypes[props.ansType](
-    props.ansTypeProps as TAnsTypeProps
-  );
-
+export const Question = (props: QuestionProps) => {
   return (
     <div className="question">
-      <div className="questionLine">{props.questionLine}</div>
-      <div className="questionAnswer">{answer}</div>
+      <h1 className="question__line">{props.questionLine}</h1>
+      <div className="question__content">{props.children}</div>
+
       <div className="questionSubmitSlot">{props.submitBtn}</div>
     </div>
   );
