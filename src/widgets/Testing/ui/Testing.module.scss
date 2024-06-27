@@ -1,0 +1,15 @@
+.testing {
+  max-width: 80rem;
+  border: 1px pink solid;
+
+  &__progress {
+    border: 1px green solid;
+
+    div {
+      div {
+        flex-wrap: wrap;
+        row-gap: 2px;
+      }
+    }
+  }
+}

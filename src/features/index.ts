@@ -1,4 +1,4 @@
-export { SubmitQuestion } from "./submitAns/ui/AnswerQuestion";
+export { SubmitQuestion } from "./submitAns/ui/SubmitQuestion";
 export { LongAns } from "./toAnswerQuestion/ui/LongAns";
 export { ShortAns } from "./toAnswerQuestion/ui/ShortAns";
 export { MultipleVars } from "./toAnswerQuestion/ui/MultipleVars";
