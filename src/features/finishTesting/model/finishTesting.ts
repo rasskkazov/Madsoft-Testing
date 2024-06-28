@@ -1,3 +1,11 @@
+import { questionStore } from "@/entities";
+import { ANSWER_VALUE } from "@/entities/question/model/types";
+
 export const finishTesting = () => {
-  alert("Отправка ответов на бек");
+  const score = questionStore
+    .getQuestions()
+    .map((question) => `${question.questionLine}  —  ${question[ANSWER_VALUE]}`)
+    .join("\n");
+
+  alert(`Результат: \n${score}`);
 };

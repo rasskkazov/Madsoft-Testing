@@ -13,12 +13,8 @@ type QuestionProps = Omit<TQuestion, "type" | "answerValue"> & {
 export const Question = (props: QuestionProps) => {
   const [form] = Form.useForm<Pick<TQuestion, "answerValue">>();
 
-  const onFinish: FormProps<Pick<TQuestion, "answerValue">>["onFinish"] = (
-    inp
-  ) => {
-    questionStore.updateQuestionAnswer(props.id, inp[ANSWER_VALUE]);
+  const onFinish = (inp: Pick<TQuestion, "answerValue">) =>
     props.onSubmit(props.id, inp[ANSWER_VALUE]);
-  };
 
   return (
     <Flex className="question" gap="middle" vertical>

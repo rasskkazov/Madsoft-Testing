@@ -10,8 +10,7 @@ import { useTesting } from "../model/useTesting";
 const { Title } = Typography;
 
 export const Testing = (props: { questions: TQuestion[] }) => {
-  const { curQuestion, onAnswer, progressPercent, isLastQuestion } =
-    useTesting();
+  const { curQuestion, onAnswer, progressPercent } = useTesting();
 
   return (
     <div className={classes.testing}>
@@ -36,7 +35,7 @@ export const Testing = (props: { questions: TQuestion[] }) => {
           {getAnswerFormElement(curQuestion)}
         </Question>
       )}
-      {isLastQuestion && <div>Это последний вопрос</div>}
+      {!curQuestion && "Заного"}
     </div>
   );
 };
