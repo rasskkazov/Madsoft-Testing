@@ -1,12 +1,10 @@
-import React from "react";
-import type { CountdownProps } from "antd";
 import { Statistic } from "antd";
+import { useCountDown } from "../model/useCountDown";
 
 const { Countdown } = Statistic;
 
-const deadline = Date.now() + 1000 * 60 * 2;
-
 export const TimeCountdown = (props: { onFinish: () => void }) => {
+  const { deadline } = useCountDown();
   return (
     <Countdown value={deadline} onFinish={props.onFinish} format="mm:ss" />
   );

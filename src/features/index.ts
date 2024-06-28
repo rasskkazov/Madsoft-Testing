@@ -6,3 +6,4 @@ export { getAnswerFormElement } from "./toAnswerQuestion/lib/getAnswerFormElemen
 export { finishTesting } from "./finishTesting/model/finishTesting";
 export { Retry } from "./retry/Retry";
 export { TimeCountdown } from "./countDown/ui/TimeCountdown";
+export { DEADLINE } from "./countDown/model/useCountDown";

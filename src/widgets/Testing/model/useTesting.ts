@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { finishTesting } from "@/features";
+import { DEADLINE, finishTesting } from "@/features";
 import { questionStore } from "@/entities";
 import { TQuestion, ANSWER_VALUE } from "@/entities/question/model/types";
 
@@ -14,6 +14,7 @@ export const useTesting = () => {
   const onFinish = () => {
     finishTesting();
     setCurQuestion(null);
+    localStorage.setItem(DEADLINE, "");
   };
 
   useEffect(() => {

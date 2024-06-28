@@ -13,7 +13,7 @@ const antdConf = {
 
   components: {
     Typography: {
-      titleMarginTop: 0,
+      titleMargin: 0,
       titleMarginBottom: 26,
     },
     Progress: {
