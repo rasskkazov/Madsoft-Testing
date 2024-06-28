@@ -3,8 +3,6 @@ import { Input, Form } from "antd";
 import { ANSWER_FORM_NAME } from "@/entities";
 import { TQuestion } from "@/entities/question/model/types";
 
-const { TextArea } = Input;
-
 export const TextShort = (props: { maxLength?: TQuestion["maxLength"] }) => {
   return (
     <Form.Item

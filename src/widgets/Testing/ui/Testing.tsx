@@ -1,12 +1,7 @@
 import { Flex, Progress, Typography } from "antd";
 import { useTesting } from "../model/useTesting";
 
-import {
-  Retry,
-  TimeCountdown,
-  finishTesting,
-  getAnswerFormElement,
-} from "@/features";
+import { Retry, TimeCountdown, getAnswerFormElement } from "@/features";
 import { Question } from "@/entities";
 import { TQuestion } from "@/entities/question/model/types";
 import * as classes from "./Testing.module.scss";
@@ -42,9 +37,13 @@ export const Testing = (props: { questions: TQuestion[] }) => {
           {getAnswerFormElement(curQuestion)}
         </Question>
       )}
-      <br />
-      <br />
-      {!curQuestion && <Retry />}
+      {!curQuestion && (
+        <>
+          <br />
+          <br />
+          <Retry />
+        </>
+      )}
     </div>
   );
 };

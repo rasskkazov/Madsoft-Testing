@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { Typography, Flex, Form, Button, FormProps, Space } from "antd";
+import { Typography, Flex, Form, Button, Space } from "antd";
 import { ANSWER_VALUE, TQuestion } from "../model/types";
-import { questionStore } from "../model/QuestionStore";
+import { useQuestion } from "../model/useQuestion";
 
 const { Title } = Typography;
 
@@ -11,10 +11,7 @@ type QuestionProps = Omit<TQuestion, "type" | "answerValue"> & {
 };
 
 export const Question = (props: QuestionProps) => {
-  const [form] = Form.useForm<Pick<TQuestion, "answerValue">>();
-
-  const onFinish = (inp: Pick<TQuestion, "answerValue">) =>
-    props.onSubmit(props.id, inp[ANSWER_VALUE]);
+  const { form, onFinish } = useQuestion(props.onSubmit, props.id);
 
   return (
     <Flex className="question" gap="middle" vertical>
