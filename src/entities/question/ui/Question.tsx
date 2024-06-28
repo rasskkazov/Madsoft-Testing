@@ -1,24 +1,23 @@
 import { ReactNode } from "react";
 import { Typography, Flex, Form, Button, FormProps, Space } from "antd";
-import { TAnswer, TQuestion } from "../model/types";
-import { ansStorage } from "../model/AnsStore";
+import { ANSWER_VALUE, TQuestion } from "../model/types";
+import { questionStore } from "../model/QuestionStore";
 
 const { Title } = Typography;
 
-type QuestionProps = Omit<TQuestion, "type"> & {
+type QuestionProps = Omit<TQuestion, "type" | "answerValue"> & {
   children: ReactNode;
+  onSubmit?: (id: number, value: TQuestion["answerValue"]) => void;
 };
 
 export const Question = (props: QuestionProps) => {
-  const [form] = Form.useForm<TAnswer>();
+  const [form] = Form.useForm<Pick<TQuestion, "answerValue">>();
 
-  const onFinish: FormProps<{ value: string | string[] }>["onFinish"] = (
+  const onFinish: FormProps<Pick<TQuestion, "answerValue">>["onFinish"] = (
     inp
   ) => {
-    ansStorage.addAns({
-      id: props.id,
-      value: inp.value,
-    });
+    questionStore.updateQuestionAnswer(props.id, inp[ANSWER_VALUE]);
+    props.onSubmit(props.id, inp[ANSWER_VALUE]);
   };
 
   return (
