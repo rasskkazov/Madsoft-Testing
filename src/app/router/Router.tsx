@@ -14,6 +14,11 @@ export const router = createBrowserRouter([
         element: <Main />,
         errorElement: <ErrorPage />,
       },
+      {
+        path: paths.SEMI_MAIN,
+        element: <Main />,
+        errorElement: <ErrorPage />,
+      },
     ],
   },
 ]);
