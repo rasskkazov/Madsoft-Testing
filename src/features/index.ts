@@ -5,3 +5,4 @@ export { SingleVar } from "./toAnswerQuestion/ui/SingleVar";
 export { getAnswerFormElement } from "./toAnswerQuestion/lib/getAnswerFormElement";
 export { finishTesting } from "./finishTesting/model/finishTesting";
 export { Retry } from "./retry/Retry";
+export { TimeCountdown } from "./countDown/ui/TimeCountdown";

@@ -1,20 +1,27 @@
-import { Progress, Typography } from "antd";
-// import { useTesting } from "../model/useTesting";
+import { Flex, Progress, Typography } from "antd";
+import { useTesting } from "../model/useTesting";
 
-import { Retry, getAnswerFormElement } from "@/features";
+import {
+  Retry,
+  TimeCountdown,
+  finishTesting,
+  getAnswerFormElement,
+} from "@/features";
 import { Question } from "@/entities";
 import { TQuestion } from "@/entities/question/model/types";
 import * as classes from "./Testing.module.scss";
-import { useTesting } from "../model/useTesting";
 
 const { Title } = Typography;
 
 export const Testing = (props: { questions: TQuestion[] }) => {
-  const { curQuestion, onAnswer, progressPercent } = useTesting();
+  const { curQuestion, onAnswer, progressPercent, onFinish } = useTesting();
 
   return (
     <div className={classes.testing}>
-      <Title level={4}>Тестирование</Title>
+      <Flex gap={20} justify="space-between" align="center">
+        <Title level={4}>Тестирование</Title>
+        <TimeCountdown onFinish={onFinish} />
+      </Flex>
 
       <div className={classes.testing__progress}>
         <Progress

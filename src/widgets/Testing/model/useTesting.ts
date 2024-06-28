@@ -11,6 +11,11 @@ export const useTesting = () => {
     questionStore.getQuestions()
   );
 
+  const onFinish = () => {
+    finishTesting();
+    setCurQuestion(null);
+  };
+
   useEffect(() => {
     const index = testingProgress.findIndex(
       (question) => !question[ANSWER_VALUE]
@@ -18,8 +23,7 @@ export const useTesting = () => {
 
     if (index !== -1) setCurQuestion(testingProgress[index]);
     else {
-      finishTesting();
-      setCurQuestion(null);
+      onFinish();
     }
 
     const numberOfCompleted: number = testingProgress.reduce(
@@ -47,5 +51,5 @@ export const useTesting = () => {
     });
   };
 
-  return { curQuestion, onAnswer, progressPercent };
+  return { curQuestion, onAnswer, progressPercent, onFinish };
 };

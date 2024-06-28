@@ -7,5 +7,7 @@ export const finishTesting = () => {
     .map((question) => `${question.questionLine}  —  ${question[ANSWER_VALUE]}`)
     .join("\n");
 
-  alert(`Результат: \n\n${score}`);
+  const correct = "Слон\nИрландия, Швеция\nКр,Ор,Жёл,Зел,Гол,Син,Фиол\nВодород";
+
+  alert(`Результат: \n\n${score}\n\n${correct}`);
 };
