@@ -9,7 +9,10 @@ export const MultipleVars = (props: { variants: TQuestion["variants"] }) => {
       name={ANSWER_FORM_NAME}
       rules={[{ required: true, message: "Выберите вариант" }]}
     >
-      <Checkbox.Group options={props.variants} />
+      <Checkbox.Group
+        options={props.variants}
+        style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}
+      />
     </Form.Item>
   );
 };

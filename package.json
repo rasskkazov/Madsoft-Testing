@@ -50,6 +50,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "@ant-design/colors": "^7.0.2",
     "antd": "^5.18.3",
     "mobx": "^6.12.3",
     "mobx-react": "^9.1.1",
