@@ -1,10 +1,12 @@
 import { Form, Checkbox } from "antd";
-import { VariantsAnswerProps } from "../model/types";
 
-export const MultipleVars = (props: VariantsAnswerProps) => {
+import { ANSWER_FORM_NAME } from "@/entities";
+import { TQuestion } from "@/entities/question/model/types";
+
+export const MultipleVars = (props: { variants: TQuestion["variants"] }) => {
   return (
     <Form.Item
-      name={"value"}
+      name={ANSWER_FORM_NAME}
       rules={[{ required: true, message: "Выберите вариант" }]}
     >
       <Checkbox.Group options={props.variants} />

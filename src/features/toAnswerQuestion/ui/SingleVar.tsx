@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Radio, Space, Form } from "antd";
 import type { RadioChangeEvent } from "antd";
-import { VariantsAnswerProps } from "../model/types";
 
-export const SingleVar = (props: VariantsAnswerProps) => {
+import { ANSWER_FORM_NAME } from "@/entities";
+import { TQuestion } from "@/entities/question/model/types";
+
+export const SingleVar = (props: { variants: TQuestion["variants"] }) => {
   const [value, setValue] = useState<string>(null);
 
   const onChange = (e: RadioChangeEvent) => {
@@ -12,7 +14,7 @@ export const SingleVar = (props: VariantsAnswerProps) => {
 
   return (
     <Form.Item
-      name={"value"}
+      name={ANSWER_FORM_NAME}
       rules={[{ required: true, message: "Выберите вариант" }]}
     >
       <Radio.Group onChange={onChange} value={value}>
