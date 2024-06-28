@@ -1,27 +1,46 @@
-// import { ansStore } from "@/entities";
-// import { TQuestion } from "@/entities/question/model/types";
+import { questionStore } from "@/entities";
+import { TQuestion, ANSWER_VALUE } from "@/entities/question/model/types";
+import { useState, useEffect } from "react";
 
-// import { useEffect, useState } from "react";
+export const useTesting = () => {
+  const [curQuestion, setCurQuestion] = useState<TQuestion>(null);
+  const [progressPercent, setProgressPercent] = useState<number>(null);
+  const [isLastQuestion, setIsLastQuestion] = useState(false);
+  const [testingProgress, setTestingProgress] = useState(
+    questionStore.getQuestions()
+  );
 
-// export const useTesting = (questions: TQuestion[]) => {
-//   const [completedQuestions, setCompletedQuestions] = useState(null);
+  useEffect(() => {
+    const index = testingProgress.findIndex(
+      (question) => !question[ANSWER_VALUE]
+    );
 
-//   useEffect(() => {
-//     const handleStorageChange = (event: StorageEvent) => {
-//       console.log("alo");
-//     };
+    if (index !== -1) {
+      setCurQuestion(testingProgress[index]);
+      setIsLastQuestion(index === testingProgress.length - 1);
 
-//     window.addEventListener("storage", handleStorageChange);
-//     return () => window.removeEventListener("storage", handleStorageChange);
-//   }, []);
+      const numberOfCompleted: number = testingProgress.reduce(
+        (accumulator, question) => {
+          return question[ANSWER_VALUE] ? accumulator + 1 : accumulator;
+        },
+        0
+      );
 
-//   const uncompletedQuestions = questions.filter((question) => {
-//     return !ansStore
-//       .getAnswers()
-//       .some((completeQuestion) => completeQuestion.id === question.id);
-//   });
+      setProgressPercent((numberOfCompleted / testingProgress.length) * 100);
+    }
+  }, [testingProgress]);
 
-//   const curQuestion = uncompletedQuestions[0];
+  const onAnswer = (id: number, value: TQuestion["answerValue"]) => {
+    setTestingProgress((questions) => {
+      const questionToUpdate = questions.find((question) => question.id === id);
+      questionToUpdate[ANSWER_VALUE] = value;
+      const updatedQuestions = questions.map((question) => {
+        if (question.id === questionToUpdate.id) return questionToUpdate;
+        return question;
+      });
+      return updatedQuestions;
+    });
+  };
 
-//   return { curQuestion };
-// };
+  return { curQuestion, onAnswer, progressPercent, isLastQuestion };
+};
