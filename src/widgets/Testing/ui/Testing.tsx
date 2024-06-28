@@ -1,7 +1,7 @@
 import { Progress, Typography } from "antd";
 // import { useTesting } from "../model/useTesting";
 
-import { getAnswerFormElement } from "@/features";
+import { Retry, getAnswerFormElement } from "@/features";
 import { Question } from "@/entities";
 import { TQuestion } from "@/entities/question/model/types";
 import * as classes from "./Testing.module.scss";
@@ -35,7 +35,9 @@ export const Testing = (props: { questions: TQuestion[] }) => {
           {getAnswerFormElement(curQuestion)}
         </Question>
       )}
-      {!curQuestion && "Заного"}
+      <br />
+      <br />
+      {!curQuestion && <Retry />}
     </div>
   );
 };

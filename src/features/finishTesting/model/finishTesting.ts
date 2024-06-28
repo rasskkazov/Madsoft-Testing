@@ -7,5 +7,5 @@ export const finishTesting = () => {
     .map((question) => `${question.questionLine}  —  ${question[ANSWER_VALUE]}`)
     .join("\n");
 
-  alert(`Результат: \n${score}`);
+  alert(`Результат: \n\n${score}`);
 };

@@ -18,8 +18,8 @@ export const useTesting = () => {
 
     if (index !== -1) setCurQuestion(testingProgress[index]);
     else {
-      setCurQuestion(null);
       finishTesting();
+      setCurQuestion(null);
     }
 
     const numberOfCompleted: number = testingProgress.reduce(
